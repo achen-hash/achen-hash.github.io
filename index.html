@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>童年阿陈卡组码</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700;900&display=swap">
+<style>
+body{margin:0}
+[hidden]{display:none!important}
+/* layout: header + how-to strip, then one collapsible section per video (newest first), each a grid of tappable deck QR cards; tap opens a large QR */
+:root{--bg:#F3F2F0;--panel:#FFFFFF;--ink:#1B1A1F;--muted:#67626F;--line:#E2DEE5;--red:#D62E28;--yellow:#FFD84D;--sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141317;--panel:#1E1D22;--ink:#EEEDF2;--muted:#A6A1AE;--line:#302E36;--red:#FF5B52;--yellow:#F2C94C;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141317;--panel:#1E1D22;--ink:#EEEDF2;--muted:#A6A1AE;--line:#302E36;--red:#FF5B52;--yellow:#F2C94C;color-scheme:dark}
+html,body{background:var(--bg);color:var(--ink);font-family:var(--sans)}
+body{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:22px 48px}
+.wrap{max-width:1100px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{background:var(--red);color:#fff;font-weight:900;font-size:15px;line-height:1.05;padding:7px 8px;border-radius:8px;text-align:center;flex:none}
+h1{font-size:28px;font-weight:900;margin:0;text-wrap:balance}
+.lede{color:var(--muted);margin:6px 0 0;line-height:1.7;font-size:15px;max-width:64ch}
+.how{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 16px;line-height:1.8;font-size:15px}
+.how b{color:var(--red)}
+.video{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:4px 14px 14px}
+summary{cursor:pointer;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:12px 0;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"▸";color:var(--muted);transition:transform .15s}
+details[open] summary::before{transform:rotate(90deg)}
+.date{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.new{font-size:12px;font-weight:900;background:var(--red);color:#fff;border-radius:6px;padding:1px 7px}
+.vt{font-weight:900;font-size:17px;flex:1 1 260px;min-width:0}
+.count{font-size:13px;color:var(--muted)}
+.watch{margin:0 0 10px}.watch a{color:var(--red);font-weight:700;text-decoration:none}
+.grid{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.deck{display:flex;flex-direction:column;gap:4px;min-width:0}
+.open{font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer;text-align:center;width:100%}
+.open:hover{border-color:var(--red)}
+.open:focus-visible,.close:focus-visible,summary:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+.qr{width:100%;max-width:200px;height:auto;aspect-ratio:1;border-radius:8px;background:#fff;image-rendering:pixelated}
+.rank{font-size:12px;font-weight:900;color:#fff;background:var(--red);border-radius:6px;padding:1px 8px;margin-top:4px}
+.name{font-weight:900;font-size:15px;line-height:1.35;text-wrap:balance}
+.sub{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.lim{font-size:13px;color:var(--red);font-weight:700;text-align:center;text-decoration:none}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));z-index:20}
+.box{background:var(--panel);border-radius:16px;padding:18px;max-width:440px;width:100%;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.box img{width:100%;max-width:400px;height:auto;aspect-ratio:1;background:#fff;border-radius:10px;image-rendering:pixelated}
+.box .name{font-size:19px}
+.close{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:8px 18px;cursor:pointer;margin-top:4px}
+.mini{width:96px;height:54px;object-fit:cover;border-radius:6px;flex:none}
+.thumb{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;text-decoration:none;color:var(--red);font-weight:700}
+.thumb img{width:100%;max-width:360px;height:auto;aspect-ratio:16/9;border-radius:10px;border:1px solid var(--line)}
+footer{color:var(--muted);font-size:13px;text-align:center}
+</style>
+<div class="wrap">
+  <header>
+    <div class="brand"><div class="logo">童年<br>阿陈</div><h1>童年阿陈卡组码</h1></div>
+    <p class="lede">影片里介绍过的卡组都放在这里，最新的影片在最上面。点任何一套就会放大二维码。</p>
+  </header>
+  <div class="how">在《PTCG Pocket》里：<b>卡组 → 建立 → 读取条码</b>，对准二维码就能抄整副卡组。用手机看这一页的话，可以用另一台装置打开这页来扫。</div>
+<details class="video" id="v-guilong" open><summary><img class="mini" src="https://i.ytimg.com/vi/f6arXLjamfE/maxresdefault.jpg" alt="" width="128" height="72"><span class="date">2026/10/31</span><span class="new">最新</span><span class="vt">胜率最高大赛冠军‼️9胜1败根本无解‼️ 鬼龙实战</span><span class="count">1 套</span></summary>
+<p class="watch"><a class="thumb" href="https://www.youtube.com/watch?v=f6arXLjamfE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/f6arXLjamfE/maxresdefault.jpg" alt="影片封面" width="640" height="360" loading="lazy"><span>▶ 看这支影片</span></a></p><ul class="grid"><li class="deck"><button class="open" data-v="0" data-d="0" aria-label="放大 骑拉帝纳 ex + 哈克龙 的卡组码">
+<img class="qr" data-code="DZiWnpiWnpibgJidJJiWqJiWqJiXKpiYLpiaXpiaXpidTJictpictgcAWPwAWPwAUXIAWN4AWN4AUSwAUSwCBQE=" alt="" width="240" height="240" loading="lazy">
+<span class="rank">阿陈实战用</span><span class="name">骑拉帝纳 ex + 哈克龙</span><span class="sub">影片里阿陈打 7 场用的卡组</span></button></li></ul></details>
+<details class="video" id="v-c1top" open><summary><img class="mini" src="https://i.ytimg.com/vi/DWqhycIIjcE/maxresdefault.jpg" alt="" width="128" height="72"><span class="date">2026/10/30</span><span class="vt">环境才过一天，天塌了‼️ C1 首日 163 人比赛上榜卡组</span><span class="count">14 套</span></summary>
+<p class="watch"><a class="thumb" href="https://www.youtube.com/watch?v=DWqhycIIjcE" target="_blank" rel="noopener"><img src="https://i.ytimg.com/vi/DWqhycIIjcE/maxresdefault.jpg" alt="影片封面" width="640" height="360" loading="lazy"><span>▶ 看这支影片</span></a></p><ul class="grid"><li class="deck"><button class="open" data-v="1" data-d="0" aria-label="放大 超级喷火龙Y ex + 炎帝 ex 的卡组码">
+<img class="qr" data-code="DJiWnpiWnpiWqJiWqJiXopiYLpiaDpiaDpiaSpiaXpicopictggAJ+IAJ+IAM4YAPwIAPwIAPwwAPwwAVb4A" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 1 名</span><span class="name">超级喷火龙Y ex + 炎帝 ex</span><span class="sub">玩家 golfermt</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/golfermt/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="1" aria-label="放大 超级甲贺忍蛙 ex + 甲贺忍蛙 ex 的卡组码">
+<img class="qr" data-code="C5iWnpiWnpiWqJiWqJiXopiXwJiX/JiYYJiaSpiaXpicrAkAA3oAKKAAKKAALR4AVpoAVpoAVqQAVqQAVq4A" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 2 名</span><span class="name">超级甲贺忍蛙 ex + 甲贺忍蛙 ex</span><span class="sub">玩家 dj_marnel</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/dj_marnel/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="2" aria-label="放大 月亮伊布 ex + 月亮伊布 的卡组码">
+<img class="qr" data-code="DJiWnpiWnpiWqJiWqJiXKpiXwJiYLpiaXpiapJibgJiccJiccAgAJdAAJiAAMCoAMXQAMXQARYgAWFIAWFIA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 4 名</span><span class="name">月亮伊布 ex + 月亮伊布</span><span class="sub">玩家 eddiespfc</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/eddiespfc/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="3" aria-label="放大 骑拉帝纳 ex + 哈克龙 的卡组码">
+<img class="qr" data-code="DZiWnpiWnpiWqJiWqJiXwJiYLpiaXpiaXpictpictpidJJidJJidTAcAUSwAUSwAUXIAWN4AWN4AWPwAWPwA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 5 名</span><span class="name">骑拉帝纳 ex + 哈克龙</span><span class="sub">玩家 victorssito</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/victorssito/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="4" aria-label="放大 密勒顿 ex + 自爆磁怪 的卡组码">
+<img class="qr" data-code="C5iWnpiWnpiWqJiWqJiXKpiXopiXwJiaXpiaaJiahpicAgkAA9QAA9QAHPIAHPIAM+oAM+oAM/4AR6QAR6QA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 6 名</span><span class="name">密勒顿 ex + 自爆磁怪</span><span class="sub">玩家 hitemhazel</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/hitemhazel/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="5" aria-label="放大 超级雷电兽 ex + 光电伞蜥 的卡组码">
+<img class="qr" data-code="DZiWnpiWnpiWqJiWqJiXwJiaXpiacpiacpiahpiahpia9JibgJicIAcANBIANBIAP7YAP8AAP8AATvwATvwA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 8 名</span><span class="name">超级雷电兽 ex + 光电伞蜥</span><span class="sub">玩家 javiercazorla</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/javiercazorla/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="6" aria-label="放大 三首恶龙 + 超级勾魂眼 ex 的卡组码">
+<img class="qr" data-code="DpiWnpiWnpiWqJiWqJiXKpiXwJiYYJiYYJiaXpiaXpibdpiccJiccJidTAYAMFIAMFIAMGYAMGYARYgAS74A" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 9 名</span><span class="name">三首恶龙 + 超级勾魂眼 ex</span><span class="sub">玩家 yuehidden</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/yuehidden/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="7" aria-label="放大 皮卡丘 ex + 巴布土拨 的卡组码">
+<img class="qr" data-code="DJiWnpiWnpiWqJiWqJiXKpiYLpiYYJiYYJiaXpidLpidLpidTAgAGUYAGUYAPG4APG4AVrgAVrgAVv4AVv4A" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 11 名</span><span class="name">皮卡丘 ex + 巴布土拨</span><span class="sub">玩家 juliusrock</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/juliusrock/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="8" aria-label="放大 超级超梦X ex + 梦幻 ex 的卡组码">
+<img class="qr" data-code="D5iWnpiWnpiWqJiWqJiXKpiXwJiX8piaXpibCJibCJibgJiblJibxpidJJidJAUAS4IAVzoAVzoAV0QAV0QA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 20 名</span><span class="name">超级超梦X ex + 梦幻 ex</span><span class="sub">玩家 nagetto_zuki</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/nagetto_zuki/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="9" aria-label="放大 阿罗拉椰蛋树 ex + 叶伊布 ex 的卡组码">
+<img class="qr" data-code="DJiWnpiWnpiWqJiWqJiXwJiXwJiYfpiYfpiaXpiaXpiapJiapAgACGYACGYAEPQAEPQAMXQAMXQAVTwAVTwA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 22 名</span><span class="name">阿罗拉椰蛋树 ex + 叶伊布 ex</span><span class="sub">玩家 seedax</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/seedax/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="10" aria-label="放大 帕底亚土王 的卡组码">
+<img class="qr" data-code="EJiWnpiWnpiWqJiWqJiXKpiXwJiYLpiaIpiaIpiaXpiapJiapJiblJibxpidVpidVgQAV+QAV+QAV+4AV+4A" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 23 名</span><span class="name">帕底亚土王</span><span class="sub">玩家 castro37</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/castro37/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="11" aria-label="放大 玛力露丽 + 长耳兔 的卡组码">
+<img class="qr" data-code="CJiWnpiWqJiaXpiaXpiaaJiaaJia1picFgwAVeYAVeYAVfAAVfAAV04AV04AV1gAV1gAWYgAWYgAWZIAWZIA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 31 名</span><span class="name">玛力露丽 + 长耳兔</span><span class="sub">玩家 hansuwe</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/hansuwe/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="12" aria-label="放大 超级路卡利欧 ex + 路卡利欧 的卡组码">
+<img class="qr" data-code="DZiWlJiWnpiWnpiWqJiWqJiXwJiaXpiaXpiapJiauJibgJiblJibxgcABgQADogADpIAFbgARCAARDQARDQA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 32 名</span><span class="name">超级路卡利欧 ex + 路卡利欧</span><span class="sub">玩家 njjord7</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/njjord7/decklist" target="_blank" rel="noopener">完整卡表</a></li><li class="deck"><button class="open" data-v="1" data-d="13" aria-label="放大 咚咚鼠 ex + 爱管侍 ex 的卡组码">
+<img class="qr" data-code="DpiWnpiWnpiWqJiWqJiXwJiaXpiaXpiauJiauJia/picFpicFpidJJidJAYAGUYAGUYALv4ALv4ASxQASxQA" alt="" width="240" height="240" loading="lazy">
+<span class="rank">第 41 名</span><span class="name">咚咚鼠 ex + 爱管侍 ex</span><span class="sub">玩家 stake</span></button><a class="lim" href="https://play.limitlesstcg.com/tournament/6ae11ff180a8f79408d1faf4/player/stake/decklist" target="_blank" rel="noopener">完整卡表</a></li></ul></details>
+  <footer>童年阿陈整理 · 有新影片就会更新</footer>
+</div>
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-labelledby="m-name">
+  <div class="box"><span class="rank" id="m-rank"></span><span class="name" id="m-name"></span><img id="m-img" alt=""><span class="sub" id="m-sub"></span><button class="close" id="m-close">关闭</button></div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+document.querySelectorAll('img[data-code]').forEach(function(im){var q=qrcode(0,'M');q.addData(im.dataset.code,'Byte');q.make();im.src=q.createDataURL(8,4);});
+</script>
+<script>
+const modal=document.getElementById('modal');let last=null;
+document.querySelectorAll('.open').forEach(b=>b.addEventListener('click',()=>{
+  last=b;const li=b.closest('.deck');
+  document.getElementById('m-img').src=b.querySelector('img').src;
+  document.getElementById('m-rank').textContent=b.querySelector('.rank').textContent;
+  document.getElementById('m-name').textContent=b.querySelector('.name').textContent;
+  document.getElementById('m-sub').textContent=b.querySelector('.sub').textContent;
+  modal.hidden=false;document.getElementById('m-close').focus();
+}));
+function close(){modal.hidden=true;if(last)last.focus()}
+document.getElementById('m-close').onclick=close;
+modal.addEventListener('click',e=>{if(e.target===modal)close()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)close()});
+</script>
